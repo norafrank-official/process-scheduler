@@ -23,12 +23,4 @@ A robust Python application designed for simulating, managing, and visualizing o
 
 ---
 
-## 📂 Repository Structure
 
-```text
-process-scheduler/
-├── live.py           # Core live simulation script
-├── src/              # Source code modules and algorithms
-├── tests/            # Unit tests for scheduling algorithms
-├── .gitignore        # Git ignore rules
-└── README.md         # Project documentation
