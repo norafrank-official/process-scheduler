@@ -279,11 +279,21 @@ def kpi(label, value, sub="", accent=False):
     return f'<div class="{cls}"><div class="l">{label}</div><div class="v">{value}</div><div class="s">{sub}</div></div>'
 
 
+def _shade(rgb):
+    """Return a column styler that shades cells by value (no matplotlib needed)."""
+
+    def f(col):
+        hi = max(col.max(), 1)
+        return [f"background-color: rgba({rgb},{0.10 + 0.50 * v / hi:.2f}); color: #f1f5f9" for v in col]
+
+    return f
+
+
 def style_table(df: pd.DataFrame):
     cols = ["Completion", "Turnaround", "Waiting", "Response"]
     return (
-        df.style.background_gradient(subset=["Waiting"], cmap="Blues", low=0.0, high=1.2)
-        .background_gradient(subset=["Turnaround"], cmap="Purples", low=0.0, high=1.2)
+        df.style.apply(_shade("34,211,238"), subset=["Waiting"])
+        .apply(_shade("167,139,250"), subset=["Turnaround"])
         .format({c: "{:d}" for c in cols})
     )
 
